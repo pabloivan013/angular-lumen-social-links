@@ -1,0 +1,9 @@
+.btn {
+    border: none;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    &:hover {
+        background-color: rgb(10, 28, 82);
+    }
+  }

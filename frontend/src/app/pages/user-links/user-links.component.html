@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-2">
+    </div>
+    <div class="col-md-auto">
+      <div *ngIf="loadingUser; else elseBlockUser">
+        <app-loading [message]="'Loading user'"></app-loading>
+      </div>
+      <ng-template #elseBlockUser>
+        <mat-card *ngIf="successUser; else elseBlockSuccess">
+          <div class="container-fluid">
+            <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+              <div class="d-flex justify-content-md-center">
+                <mat-card-header>
+                  <img mat-card-avatar [src]="user.picture" />
+                  <mat-card-title>{{ user.accountname }}</mat-card-title>
+                </mat-card-header>
+              </div>
+            </div>
+          </div>
+          </div>
+        </mat-card>
+        <ng-template #elseBlockSuccess>
+          {{userErrorMessage}}
+        </ng-template>
+      </ng-template>
+    </div>
+    <div class="col col-lg-2">
+    </div>
+  </div>
+  <div class="row justify-content-md-center mt-3">
+    <div class="col col-lg-2"></div>
+    <div class="col-md-auto">
+      <div *ngIf="loadingLinks; else elseBlockLinks">
+        <app-loading [message]="'Loading links'"></app-loading>
+      </div>
+      <ng-template #elseBlockLinks>
+        <div *ngFor="let link of user.socialLinks; index as i">
+          <div class="row mb-3">
+            <div class="col text-center">
+              <app-link-button [link]="link"></app-link-button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <div class="col col-lg-2"></div>
+  </div>
+</div>

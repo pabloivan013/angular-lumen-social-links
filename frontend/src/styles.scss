@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$success-color: #45e605;
+
+.snackbar{
+    color: white;
+    &.success {
+        background-color: rgb(18, 133, 14);
+    }
+    
+    &.error {
+        background-color: rgb(184, 17, 17);
+    }
+    .mat-simple-snackbar-action {
+        color: white !important;
+    }
+}
+

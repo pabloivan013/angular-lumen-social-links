@@ -1,0 +1,6 @@
+{
+    "domain": "dev-c67qccov.us.auth0.com",
+    "clientId": "ZUxRPEMT3dogdXtgghoCGLwM2tT0sb7f",
+    "audience": "social-links-api",
+    "serverUrl": "http://localhost:6060"
+  }
