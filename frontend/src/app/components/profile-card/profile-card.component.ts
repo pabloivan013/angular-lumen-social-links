@@ -79,7 +79,7 @@ export class ProfileCardComponent implements OnInit {
   }
 
   createUpdateUser() {
-    if (this.user.accountname.length < 5 || this.user.accountname.length > 15) {
+    if (!this.user.accountname || this.user.accountname.length < 5 || this.user.accountname.length > 15) {
       this.snackBarService.error("The account name should be between 5 and 15 characters")
       return
     }
@@ -98,7 +98,7 @@ export class ProfileCardComponent implements OnInit {
         this.successLoadUpdateUser = false
         this.errorMessage = 'Error updating user'
         if (error.status == 409){
-          this.errorMessage = error.error.message
+          this.errorMessage = 'Account name already exists'
         }
         this.snackBarService.error(this.errorMessage)
       }

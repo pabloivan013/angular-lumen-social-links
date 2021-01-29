@@ -39,11 +39,11 @@ export class UserLinksComponent implements OnInit {
       },
       (error) => {
         console.log("Error getUser: ", error)
+        this.loadingUser = false
         if (error.status == 404)
           this.userErrorMessage = "User not found"
         else
           this.userErrorMessage = "Server error"
-        this.loadingUser = false
       }
     )
 
