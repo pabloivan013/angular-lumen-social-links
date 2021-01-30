@@ -3,6 +3,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { User } from 'src/app/models/user.model';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { UserService } from 'src/app/services/user.service';
+import { AppSettings } from '../../app.settings'
 
 @Component({
   selector: 'app-profile-card',
@@ -54,8 +55,8 @@ export class ProfileCardComponent implements OnInit {
         console.log("getUser error: ", error)
         this.loadingUser = false
         this.successLoadUpdateUser = false
-        if (error.status == 404) { 
-          // User not found in db
+        if (error.status == AppSettings.VALIDATOR_CODE && error.error.sub) { 
+          // User not found in db, need to be created before save links
           this.errorServer = false
           this.errorMessage = 'Update your account name before save'
           this.snackBarService.error(this.errorMessage)
@@ -99,7 +100,7 @@ export class ProfileCardComponent implements OnInit {
         this.loadingUpdateUser = false
         this.successLoadUpdateUser = false
         this.errorMessage = 'Error updating user'
-        if (error.status == 422 && error.error.accountname){
+        if (error.status == AppSettings.VALIDATOR_CODE && error.error.accountname){
           //Validator error
           this.errorMessage = error.error.accountname[0]
         }

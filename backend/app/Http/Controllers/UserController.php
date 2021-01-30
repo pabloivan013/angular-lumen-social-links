@@ -21,7 +21,8 @@ class UserController extends Controller
     }
 
     /** Auth0 **/
-    public function createUpdateUser(Request $request) {
+    public function createUpdateUser(Request $request) 
+    {
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
@@ -32,9 +33,12 @@ class UserController extends Controller
         return response()->json($user, 201);
     }
 
-    public function getUser(Request $request) {
+    public function getUser(Request $request) 
+    {
         $this->validate($request, [
-            'sub' => 'required'
+            'sub' => 'required|exists:users'
+        ],[
+            'sub.exists' => 'User not found in db.'
         ]);
         $user = $this->userService->getUser('sub',$request['sub'], ['*']);
         return response()->json($user, 200);
@@ -43,13 +47,16 @@ class UserController extends Controller
     public function getUserLinks(Request $request)
     {
         $this->validate($request, [
-            'sub' => 'required'
+            'sub' => 'required|exists:users'
+        ],[
+            'sub.exists' => 'User not found in db.'
         ]);
         $links = $this->userService->getUserLinks('sub', $request['sub']);
         return response()->json($links);
     }
 
-    public function saveUserLinks(Request $request) {
+    public function saveUserLinks(Request $request) 
+    {
         $rules = [
             'sub' => 'required|exists:users',
             'socialLinks' => 'present|array'
@@ -65,12 +72,14 @@ class UserController extends Controller
     }
 
     /** Public **/
-    public function getUserLinksByName($accountname) {
+    public function getUserLinksByName($accountname) 
+    {
         $links = $this->userService->getUserLinks('accountname', $accountname);
         return response()->json($links, 200);
     }
 
-    public function getUserByName($accountname) {     
+    public function getUserByName($accountname) 
+    {     
         $user = $this->userService->getUser('accountname', $accountname, ['accountname','picture']);
         return response()->json($user, 200);
     }

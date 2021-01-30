@@ -5,6 +5,7 @@ import { SocialLink } from 'src/app/models/social-link.model';
 import { User } from 'src/app/models/user.model';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { UserService } from 'src/app/services/user.service';
+import { AppSettings } from '../../app.settings'
 
 @Component({
   selector: 'app-social-link-display',
@@ -46,9 +47,9 @@ export class SocialLinkDisplayComponent implements OnInit {
     if (this.authenticated) {
       
       this.user.socialLinks = this.filterNotEmptyLinks(this.user.socialLinks)
-      
       this.loadingLinks = true
       this.successLoadLinks = false
+
       this.userService.getUserLinks().subscribe(
         (links: SocialLink[]) => {
           this.user.socialLinks = this.user.socialLinks.concat(links)
@@ -56,11 +57,12 @@ export class SocialLinkDisplayComponent implements OnInit {
           this.successLoadLinks = true
           this.snackBarService.success('Social links loaded.')
         },
-        error => {
+        (error) => {
           console.log("Error getuserLinks: ", error)
           this.loadingLinks = false
-          if (error.status == 404){
-            // User not found in DB
+          if (error.status == AppSettings.VALIDATOR_CODE && error.error.sub){
+            // User not found in db, need to be created before save links
+            console.log("error: ", error.error.sub[0])
             this.successLoadLinks = true
           } else {
             // Server failed
@@ -99,7 +101,6 @@ export class SocialLinkDisplayComponent implements OnInit {
     }
     
     if (this.filterNotEmptyLinks(this.user.socialLinks).length != this.user.socialLinks.length) {
-      console.log("Empty links")
       this.snackBarService.error("You have empty links")
       return
     }
@@ -116,7 +117,7 @@ export class SocialLinkDisplayComponent implements OnInit {
         console.log("Error saveUserLinks: ",error)
         this.loadingSave = false
         let errorMessage = 'Error occurred while saving.'
-        if (error.status == 422 && error.error.sub) {
+        if (error.status == AppSettings.VALIDATOR_CODE && error.error.sub) {
           // Validator error 
           errorMessage = error.error.sub[0]
         } 
