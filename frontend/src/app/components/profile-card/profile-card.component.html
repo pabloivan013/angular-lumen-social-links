@@ -50,7 +50,9 @@
                 </div>
                 <ng-template #elseBlockSave>
                   <div *ngIf="!successLoadUpdateUser">
-                    <p><strong>{{ errorMessage }}</strong></p>
+                    <p>
+                      <strong>{{ errorMessage }}</strong>
+                    </p>
                   </div>
                   <app-share-link
                     *ngIf="validAccountName"

@@ -10,18 +10,10 @@ import { AppSettings } from '../app.settings'
 })
 export class UserService {
 
-  private userCreationSource = new Subject<Boolean>()
-
-  isCreated$ = this.userCreationSource.asObservable()
-
-  userCreated(status: Boolean) {
-    this.userCreationSource.next(status)
-  }
-
   constructor(private http: HttpClient) { }
 
   /** Auth0 endpoints **/
-  getUser(): Observable<User>  {
+  getUser(): Observable<User> {
     return this.http.get<User>(`${AppSettings.API_ENDPOINT}/auth0/users/`)
   }
 
@@ -30,7 +22,7 @@ export class UserService {
   }
 
   getUserLinks(): Observable<SocialLink[]> {
-      return this.http.get<SocialLink[]>(`${AppSettings.API_ENDPOINT}/auth0/users/links`)
+    return this.http.get<SocialLink[]>(`${AppSettings.API_ENDPOINT}/auth0/users/links`)
   }
 
   saveUserLinks(user: User): Observable<any> {
@@ -42,7 +34,7 @@ export class UserService {
     return this.http.get<SocialLink[]>(`${AppSettings.API_ENDPOINT}/users/${username}/links`)
   }
 
-  getUserByName(username:string) {
+  getUserByName(username: string) {
     return this.http.get<User>(`${AppSettings.API_ENDPOINT}/users/${username}`)
   }
 
