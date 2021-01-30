@@ -14,7 +14,7 @@ export class ProfileCardComponent implements OnInit {
 
   @Input() user: User
   
-  loadingSaveUser: boolean = false
+  loadingUpdateUser: boolean = false
   loadingUser: boolean = false
 
   successLoadUpdateUser: boolean = false
@@ -79,26 +79,29 @@ export class ProfileCardComponent implements OnInit {
   }
 
   createUpdateUser() {
+    this.successLoadUpdateUser = false
     if (!this.user.accountname || this.user.accountname.length < 5 || this.user.accountname.length > 15) {
-      this.snackBarService.error("The account name should be between 5 and 15 characters")
+      this.errorMessage = "The account name should be between 5 and 15 characters"
+      this.snackBarService.error(this.errorMessage)
       return
     }
-    this.loadingSaveUser = true
+    this.loadingUpdateUser = true
     
     this.userService.createUpdateUser(this.user).subscribe(
       (user: User) => {
-        this.loadingSaveUser = false
+        this.loadingUpdateUser = false
         this.snackBarService.success('User updated')
         this.successLoadUpdateUser = true
         this.validAccountName = user.accountname
       },
       (error) => {
         console.log("createUpdateUser error: ", error)
-        this.loadingSaveUser = false
+        this.loadingUpdateUser = false
         this.successLoadUpdateUser = false
         this.errorMessage = 'Error updating user'
-        if (error.status == 409){
-          this.errorMessage = 'Account name already exists'
+        if (error.status == 422 && error.error.accountname){
+          //Validator error
+          this.errorMessage = error.error.accountname[0]
         }
         this.snackBarService.error(this.errorMessage)
       }

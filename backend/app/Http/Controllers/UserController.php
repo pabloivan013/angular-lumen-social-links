@@ -6,6 +6,7 @@ use App\Services\User\UserService;
 use App\Models\User;
 use App\Services\Link\LinkService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator as Validator;
 
 class UserController extends Controller
 {
@@ -24,25 +25,11 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
-            'sub' => 'required'
+            'sub' => 'required',
+            'accountname'=>'required|between:5,15|unique:users'
         ]);
-        try {
-            $user = $this->userService->updateOrCreateUser($request->all());
-            return response()->json($user, 201);
-        } catch (\Illuminate\Database\QueryException $e) {
-            error_log("Error createUpdateUser: ".json_encode($e, JSON_PRETTY_PRINT));
-            $errorCode = $e->errorInfo[1];
-            $statusText = 'CreateUpdateUser error ';
-            $userMessage = '';
-            $statusCode = 500;
-            if ($errorCode == 7) {
-                // duplicate key value violates unique constraint
-                $statusText .= 'Duplicate key value violates unique constraint';
-                $userMessage .= 'Account name already exists';
-                $statusCode = 409;
-            }
-            return response()->json(['message' => $userMessage, 'statusText' => $statusText], $statusCode);
-        }
+        $user = $this->userService->updateOrCreateUser($request->all());
+        return response()->json($user, 201);
     }
 
     public function getUser(Request $request) {
@@ -63,14 +50,17 @@ class UserController extends Controller
     }
 
     public function saveUserLinks(Request $request) {
-        $this->validate($request, [
-            'sub' => 'required'
-        ]);
+        $rules = [
+            'sub' => 'required|exists:users',
+            'socialLinks' => 'present|array'
+        ];
+        $messages = [
+            'sub.exists' => 'Update your account name before save.'
+        ];
+        $this->validate($request, $rules, $messages);
+
         $user = $this->userService->getUser('sub', $request['sub'], ['id']);
-        $links = null;
-        if (array_key_exists('socialLinks', $request->all())){
-            $links = $this->linkService->deleteInsert($request['socialLinks'], $user['id']);
-        }
+        $links = $this->linkService->deleteInsert($request['socialLinks'], $user['id']);
         return response()->json($links, 201);
     }
 
@@ -80,7 +70,7 @@ class UserController extends Controller
         return response()->json($links, 200);
     }
 
-    public function getUserByName($accountname) {
+    public function getUserByName($accountname) {     
         $user = $this->userService->getUser('accountname', $accountname, ['accountname','picture']);
         return response()->json($user, 200);
     }

@@ -105,7 +105,7 @@ export class SocialLinkDisplayComponent implements OnInit {
     }
 
     this.loadingSave = true
-    
+
     this.userService.saveUserLinks(this.user).subscribe(
       (res) => {
         console.log("saveUserLinks: ", res)
@@ -115,10 +115,12 @@ export class SocialLinkDisplayComponent implements OnInit {
       (error) => {
         console.log("Error saveUserLinks: ",error)
         this.loadingSave = false
-        if (error.status == 404) 
-          this.snackBarService.error('Update your account name before save.')
-        else
-          this.snackBarService.error('Error occurred while saving.')
+        let errorMessage = 'Error occurred while saving.'
+        if (error.status == 422 && error.error.sub) {
+          // Validator error 
+          errorMessage = error.error.sub[0]
+        } 
+        this.snackBarService.error(errorMessage)
       } 
     )
 
