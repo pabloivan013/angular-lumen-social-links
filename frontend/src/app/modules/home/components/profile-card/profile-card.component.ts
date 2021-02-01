@@ -3,7 +3,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { User } from 'src/app/models/user.model';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { UserService } from 'src/app/services/user.service';
-import { AppSettings } from '../../app.settings';
+import { AppSettings } from '../../../../app.settings';
 
 @Component({
   selector: 'app-profile-card',

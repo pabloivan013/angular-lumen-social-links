@@ -13,7 +13,7 @@ class Link extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'url', 'icon', 'position', 'user_id', 'created_at', 'updated_at'
+        'name', 'url', 'icon', 'position','background_color','font_color', 'user_id', 'created_at', 'updated_at'
     ];
 
     /**

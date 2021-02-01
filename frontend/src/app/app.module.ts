@@ -8,8 +8,6 @@ import { environment as env } from '../environments/environment';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { SaveLoggedUserComponent } from './pages/save-logged-user/save-logged-user.component';
 
 // Components
 import { LoadingComponent } from './components/loading/loading.component';
@@ -36,13 +34,14 @@ import { UserLinksComponent } from './pages/user-links/user-links.component';
 import { ShareLinkComponent } from './components/share-link/share-link.component';
 import { LinkButtonComponent } from './components/link-button/link-button.component';
 
+import { HomeModule } from './modules/home/home.module';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    SaveLoggedUserComponent,
     HomeComponent,
-    ProfileComponent,
     LoadingComponent,
     NavBarComponent,
     FooterComponent,
@@ -72,6 +71,8 @@ import { LinkButtonComponent } from './components/link-button/link-button.compon
     },),
     BrowserAnimationsModule,
     MaterialModule,
+    HomeModule,
+    SharedModule,
   ],
   providers: [
     {
