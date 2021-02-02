@@ -16,11 +16,6 @@ export class SocialLinkCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log("color:", this.socialLink.background_color)
-  }
-
-  displayFontColor(event) {
-    console.log("color disp back:", this.socialLink.background_color)
   }
 
   openLink() {

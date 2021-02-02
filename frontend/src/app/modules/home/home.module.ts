@@ -8,8 +8,6 @@ import { HomeComponent } from './pages/home/home.component';
 //Shared
 import { SharedModule } from '../../shared/shared.module'
 
-
-
 @NgModule({
   declarations: [
     ProfileCardComponent, 
