@@ -71,7 +71,7 @@ export class SocialLinkDisplayComponent implements OnInit {
   }
 
   isEmptyLink(link: SocialLink): boolean {
-    return !(link.name || link.url);
+    return !link.name && !link.url;
   }
 
   filterNotEmptyLinks(links: SocialLink[]) {

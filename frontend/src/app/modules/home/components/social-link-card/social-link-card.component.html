@@ -35,10 +35,10 @@
         <app-link-button [link]="socialLink"></app-link-button>
       </div>
     </div>
-    <div class="col">
+    <div class="col pt-2 pt-md-0">
       <div class="row justify-content-between">
-        <div class="col">
-          <div class="d-flex justify-content-end">
+        <div class="col d-flex">
+          <div class="me-2">
             <input
               type="color"
               [(ngModel)]="socialLink.background_color"
@@ -46,12 +46,13 @@
               id="background"
             />
           </div>
+          <div>Background</div>
         </div>
-        <div class="col">Background</div>
+        <!-- <div class="col">Background</div> -->
       </div>
       <div class="row justify-content-md-center">
-        <div class="col">
-          <div class="d-flex justify-content-end">
+        <div class="col d-flex">
+          <div class="me-2">
             <input
               type="color"
               [(ngModel)]="socialLink.font_color"
@@ -59,8 +60,9 @@
               id="font"
             />
           </div>
+          <div>Font</div>
         </div>
-        <div class="col">Font</div>
+        <!-- <div class="col">Font</div> -->
       </div>
     </div>
   </div>
