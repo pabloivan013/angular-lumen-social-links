@@ -8,7 +8,7 @@ export class User {
     picture: string;
     socialLinks: SocialLink[] = []
 
-    constructor(name: string=undefined, email: string=undefined) {
+    constructor(name: string = undefined, email: string = undefined) {
         this.name = name
         this.email = email
     }

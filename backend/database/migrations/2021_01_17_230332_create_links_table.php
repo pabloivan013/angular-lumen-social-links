@@ -19,6 +19,8 @@ class CreateLinksTable extends Migration
             $table->string('url')->nullable();
             $table->string('icon')->nullable();
             $table->integer('position')->nullable();
+            $table->string('background_color')->nullable();
+            $table->string('font_color')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

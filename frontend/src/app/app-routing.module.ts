@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '@auth0/auth0-angular';
-import { HomeComponent } from './pages/home/home.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { SaveLoggedUserComponent } from './pages/save-logged-user/save-logged-user.component';
-import { UserLinksComponent } from './pages/user-links/user-links.component';
+
+import { HomeComponent} from './modules/home/pages/home/home.component'
+import { UserLinksComponent } from './modules/user-links/pages/user-links/user-links.component'
 
 const routes: Routes = [
   {
@@ -13,17 +11,8 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: ':username', component: UserLinksComponent
-  },
-  {
-    path: 'save-user',
-    component: SaveLoggedUserComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard],
+    path: ':username',
+    component: UserLinksComponent
   },
   {
     path: '**' , redirectTo: '/'

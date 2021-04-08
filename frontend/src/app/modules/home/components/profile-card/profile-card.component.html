@@ -1,0 +1,73 @@
+<mat-card>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <mat-card-header>
+          <img mat-card-avatar [src]="user.picture" />
+          <mat-card-title>{{ user.nickname }}</mat-card-title>
+          <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="my-0">
+          <div *ngIf="loadingUser; else elseBlockLoading">
+            <app-loading [message]="'Loading user data'"></app-loading>
+          </div>
+
+          <ng-template #elseBlockLoading>
+            <div *ngIf="errorServer; else elseBlockServer">
+              <app-error
+                [message]="'Error loading user data'"
+                (reload)="onReload($event)"
+              ></app-error>
+            </div>
+
+            <ng-template #elseBlockServer>
+              <div class="row justify-content-start">
+                <div class="col">
+                  <p>Add your username account to share your links</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Account name</mat-label>
+                    <input
+                      matInput
+                      [(ngModel)]="user.accountname"
+                      [placeholder]="user.accountname"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col px-0 mt-1">
+                  <button 
+                    [disabled]="user.accountname == validAccountName"
+                    mat-stroked-button 
+                    (click)="createUpdateUser()"
+                  >
+                    Update
+                  </button>
+                </div>
+                <div class="col"></div>
+              </div>
+              <div class="row">
+                <div *ngIf="loadingUpdateUser; else elseBlockSave">
+                  <app-loading [message]="'Updating user'"></app-loading>
+                </div>
+                <ng-template #elseBlockSave>
+                  <div *ngIf="!successLoadUpdateUser">
+                    <p>
+                      <strong>{{ errorMessage }}</strong>
+                    </p>
+                  </div>
+                  <app-share-link
+                    *ngIf="validAccountName"
+                    [url]="getUrlLink()"
+                  ></app-share-link>
+                </ng-template>
+              </div>
+            </ng-template>
+          </ng-template>
+        </mat-card-content>
+      </div>
+    </div>
+  </div>
+</mat-card>

@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div *ngIf="authenticated">
+
+        <div *ngIf="loadingLinks; else elseBlockLinks">
+          <app-loading [message]="'Loading user links'"></app-loading>
+        </div>
+        <ng-template #elseBlockLinks>
+          <div *ngIf="!successLoadLinks">
+            <app-error
+              [message]="'Error loading user links'"
+              (reload)="onReload($event)"
+            ></app-error>
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div *ngFor="let link of user.socialLinks; index as i">
+        {{ updateSocialLinkPos(link, i) }}
+        <div class="row mb-3">
+          <div class="col-1"></div>
+          <div class="col">
+            <app-social-link-card [socialLink]="link"></app-social-link-card>
+          </div>
+          <div class="col-1 text-left">
+            <button
+              matTooltip="Delete Link"
+              [matTooltipPosition]="'right'"
+              class="p-0 m-0"
+              mat-icon-button
+              color="primary"
+              (click)="deleteSocialLink(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!authenticated || (successLoadLinks && !loadingLinks)">
+    <div class="row justify-content-center">
+      <div class="col text-center">
+        <div class="d-flex justify-content-center">
+          <button
+            mat-flat-button
+            matTooltip="New Link"
+            color="primary"
+            (click)="addSocialLink()"
+          >
+            New link
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center my-3">
+      <div class="col text-center">
+        <div class="d-flex justify-content-center">
+          <button
+            mat-flat-button
+            matTooltip="Save"
+            color="primary"
+            (click)="saveUserLinks()"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div *ngIf="loadingSave">
+          <app-loading [message]="'Saving links...'"></app-loading>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
