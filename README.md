@@ -9,17 +9,20 @@ Edit auth_config.json with your auth0 options
     "clientId": "your client id",
     "audience": "your audience name",
     "serverUrl": "your url api endpoint"
-  }
+}
 ```
 
 ##### Development server
 Run `npm run start`. Navigate to http://localhost:4040/
 
-
-
-
 ##### Build
 Run `npm run build`
 
 ### Backend
-Run `php -S localhost:6060 -t public`
+
+##### Install dependencies
+
+`composer install`
+
+##### Run 
+`composer start`
