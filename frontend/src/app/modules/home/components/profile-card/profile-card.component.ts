@@ -50,13 +50,11 @@ export class ProfileCardComponent implements OnInit {
 
     this.userService.getUser().subscribe(
       (user: User) => {
-        console.log('getUser: ', user);
         Object.assign(this.user, user);
         this.validAccountName = user.accountname;
         this.loadingUser = false;
         this.successLoadUpdateUser = true;
         this.errorServer = false;
-        console.log('this.user: ', this.user);
       },
       (error) => {
         console.log('getUser error: ', error);

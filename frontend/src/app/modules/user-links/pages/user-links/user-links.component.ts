@@ -28,14 +28,12 @@ export class UserLinksComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.route.snapshot.paramMap.get('username');
-    console.log('username: ', this.username);
 
     this.loadingUser = true;
     this.successUser = false;
     this.userService.getUserByName(this.username).subscribe(
       (user: User) => {
         Object.assign(this.user, user);
-        console.log('user: ', user);
         this.loadingUser = false;
         this.successUser = true;
       },
@@ -54,7 +52,6 @@ export class UserLinksComponent implements OnInit {
     this.userService.getUserLinksByName(this.username).subscribe(
       (links: SocialLink[]) => {
         this.user.socialLinks = links;
-        console.log('links: ', links);
         this.loadingLinks = false;
         this.successLinks = true;
       },
