@@ -14,7 +14,7 @@ export class UserService {
 
   /** Auth0 endpoints **/
   getUser(): Observable<User> {
-    return this.http.get<User>(`${AppSettings.API_ENDPOINT}/auth0/users/`)
+    return this.http.get<User>(`${AppSettings.API_ENDPOINT}/auth0/users`)
   }
 
   createUpdateUser(user: User): Observable<User> {
