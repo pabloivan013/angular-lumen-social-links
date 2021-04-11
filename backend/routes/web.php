@@ -13,11 +13,6 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
-
 $router->group(['prefix' => 'api'], function () use ($router) {
 
     /** Auth0 endpoints**/
@@ -35,4 +30,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('users/{accountname}/links',  ['uses' => 'UserController@getUserLinksByName']);
 
     $router->get('users/{accountname}',  ['uses' => 'UserController@getUserByName']);
+});
+
+$router->get('/{any:.*}', function () use ($router) {
+    //return $router->app->version();
+    return view('index');
 });
