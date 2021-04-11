@@ -26,9 +26,9 @@
                   <p>Add your username account to share your links</p>
                 </div>
               </div>
-              <div class="row">
-                <div class="col">
-                  <mat-form-field appearance="outline">
+              <div class="row justify-content-start">
+                <div class="col-auto">
+                  <mat-form-field appearance="outline" style="width: 100%">
                     <mat-label>Account name</mat-label>
                     <input
                       matInput
@@ -37,7 +37,7 @@
                     />
                   </mat-form-field>
                 </div>
-                <div class="col px-0 mt-1">
+                <div class="col-auto mb-3 mt-1">
                   <button 
                     [disabled]="user.accountname == validAccountName"
                     mat-stroked-button 
@@ -46,7 +46,7 @@
                     Update
                   </button>
                 </div>
-                <div class="col"></div>
+                
               </div>
               <div class="row">
                 <div *ngIf="loadingUpdateUser; else elseBlockSave">

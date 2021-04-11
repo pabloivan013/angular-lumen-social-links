@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { mergeMap } from 'rxjs/operators';
 import { SocialLink } from 'src/app/models/social-link.model';
 import { User } from 'src/app/models/user.model';
 import { SnackbarService } from 'src/app/services/snackbar.service';
@@ -43,7 +42,7 @@ export class SocialLinkDisplayComponent implements OnInit {
 
   loadSocialLinks() {
     if (this.authenticated) {
-      this.user.socialLinks = this.filterNotEmptyLinks(this.user.socialLinks);
+      this.user.socialLinks = this.filterValidLinks(this.user.socialLinks);
       this.loadingLinks = true;
       this.successLoadLinks = false;
 
@@ -70,12 +69,12 @@ export class SocialLinkDisplayComponent implements OnInit {
     }
   }
 
-  isEmptyLink(link: SocialLink): boolean {
-    return !link.name && !link.url;
+  validLink(link: SocialLink): boolean {
+    return (link.name.length > 0 && link.url.length > 0);
   }
 
-  filterNotEmptyLinks(links: SocialLink[]) {
-    return links.filter((link) => !this.isEmptyLink(link));
+  filterValidLinks(links: SocialLink[]) {
+    return links.filter(link => this.validLink(link))
   }
 
   addSocialLink() {
@@ -97,10 +96,10 @@ export class SocialLinkDisplayComponent implements OnInit {
     }
 
     if (
-      this.filterNotEmptyLinks(this.user.socialLinks).length !=
+      this.filterValidLinks(this.user.socialLinks).length !=
       this.user.socialLinks.length
     ) {
-      this.snackBarService.error('You have empty links');
+      this.snackBarService.error('Links should have a NAME and URL');
       return;
     }
 

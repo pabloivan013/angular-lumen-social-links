@@ -4,6 +4,7 @@
       <mat-form-field appearance="standard" class="field-full-width">
         <mat-label>Link name</mat-label>
         <input
+          required
           matInput
           maxlength="55"
           class="mx-auto"
@@ -19,6 +20,7 @@
       <mat-form-field appearance="standard" class="field-full-width">
         <mat-label>URL Link</mat-label>
         <input
+          required
           matInput
           class="mx-auto"
           [(ngModel)]="socialLink.url"
