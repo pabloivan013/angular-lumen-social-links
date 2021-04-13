@@ -85,8 +85,9 @@ export class SocialLinkDisplayComponent implements OnInit {
     socialLink.position = pos;
   }
 
-  deleteSocialLink(pos: number) {
-    this.user.socialLinks.splice(pos, 1);
+  deleteLink(link: SocialLink) {
+    const index = this.user.socialLinks.indexOf(link)
+    this.user.socialLinks.splice(index, 1)
   }
 
   saveUserLinks() {

@@ -14,6 +14,6 @@
 <script src="frontend/runtime.0e49e2b53282f40c8925.js" defer=""></script>
 <script src="frontend/polyfills.8c151b8375e767ff858f.js" defer=""></script>
 <script src="frontend/scripts.e726149b167edc7a6ed2.js" defer=""></script>
-<script src="frontend/main.2738d695fecad0aa24ba.js" defer=""></script>
+<script src="frontend/main.ea65927922174261bdc8.js" defer=""></script>
 </body>
 </html>

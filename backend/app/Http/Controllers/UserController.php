@@ -27,7 +27,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required',
             'sub' => 'required',
-            'accountname'=>'required|between:5,15|unique:users'
+            'accountname'=>'required|alpha_num|between:5,15|unique:users'
         ]);
         $user = $this->userService->updateOrCreateUser($request->all());
         return response()->json($user, 201);

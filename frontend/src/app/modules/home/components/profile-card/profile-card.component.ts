@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
 import { User } from 'src/app/models/user.model';
 import { SnackbarService } from 'src/app/services/snackbar.service';
@@ -21,6 +22,13 @@ export class ProfileCardComponent implements OnInit {
   validAccountName: string = '';
   errorMessage: string = '';
 
+  formAccountName = new FormControl('',[
+    Validators.required,
+    Validators.minLength(5), 
+    Validators.maxLength(15),
+    Validators.pattern('[a-zA-Z0-9]*')
+  ])
+  
   constructor(
     private userService: UserService,
     public auth: AuthService,
@@ -52,6 +60,7 @@ export class ProfileCardComponent implements OnInit {
       (user: User) => {
         Object.assign(this.user, user);
         this.validAccountName = user.accountname;
+        this.formAccountName.setValue(this.validAccountName)
         this.loadingUser = false;
         this.successLoadUpdateUser = true;
         this.errorServer = false;
@@ -74,16 +83,13 @@ export class ProfileCardComponent implements OnInit {
   }
 
   createUpdateUser() {
+  
+    if (!this.formAccountName.valid)
+      return
+
+    this.user.accountname = this.formAccountName.value
+
     this.successLoadUpdateUser = false;
-    if (
-      !this.user.accountname ||
-      this.user.accountname.length < 5 ||
-      this.user.accountname.length > 15
-    ) {
-      this.errorMessage = 'The account name should be between 5 and 15 characters';
-      this.snackBarService.error(this.errorMessage);
-      return;
-    }
 
     this.loadingUpdateUser = true;
 

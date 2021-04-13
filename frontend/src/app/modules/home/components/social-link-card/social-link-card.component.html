@@ -1,71 +1,87 @@
 <mat-card>
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col">
-      <mat-form-field appearance="standard" class="field-full-width">
-        <mat-label>Link name</mat-label>
-        <input
-          required
-          matInput
-          maxlength="55"
-          class="mx-auto"
-          [(ngModel)]="socialLink.name"
-          name="name"
-          placeholder="name"
-        />
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <mat-form-field appearance="standard" class="field-full-width">
-        <mat-label>URL Link</mat-label>
-        <input
-          required
-          matInput
-          class="mx-auto"
-          [(ngModel)]="socialLink.url"
-          name="URL"
-          placeholder="URL"
-        />
-      </mat-form-field>
-    </div>
-  </div>
-  
-  <div class="row justify-content-between" *ngIf="socialLink.name">
-    <div class="col text-center">
-      <div>
-        <app-link-button [link]="socialLink"></app-link-button>
-      </div>
-    </div>
-    <div class="col pt-2 pt-md-0">
-      <div class="row justify-content-between">
-        <div class="col d-flex">
-          <div class="me-2">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="standard" class="field-full-width">
+            <mat-label>Link name</mat-label>
             <input
-              type="color"
-              [(ngModel)]="socialLink.background_color"
-              name="background"
-              id="background"
+              required
+              matInput
+              maxlength="55"
+              class="mx-auto"
+              [(ngModel)]="socialLink.name"
+              name="name"
+              placeholder="name"
             />
-          </div>
-          <div>Background</div>
+          </mat-form-field>
         </div>
-        <!-- <div class="col">Background</div> -->
       </div>
-      <div class="row justify-content-md-center">
-        <div class="col d-flex">
-          <div class="me-2">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="standard" class="field-full-width">
+            <mat-label>URL Link</mat-label>
             <input
-              type="color"
-              [(ngModel)]="socialLink.font_color"
-              name=""
-              id="font"
+              required
+              matInput
+              class="mx-auto"
+              [(ngModel)]="socialLink.url"
+              name="URL"
+              placeholder="URL"
             />
-          </div>
-          <div>Font</div>
+          </mat-form-field>
         </div>
-        <!-- <div class="col">Font</div> -->
       </div>
+
+      <div class="row justify-content-between" *ngIf="socialLink.name">
+        <div class="col text-center">
+          <div>
+            <app-link-button [link]="socialLink"></app-link-button>
+          </div>
+        </div>
+        <div class="col pt-2 pt-md-0 text-center">
+          <div class="row justify-content-between">
+            <div class="col d-flex">
+              <div class="me-2">
+                <input
+                  type="color"
+                  [(ngModel)]="socialLink.background_color"
+                  name="background"
+                  id="background"
+                />
+              </div>
+              <div>Background</div>
+            </div>
+            <!-- <div class="col">Background</div> -->
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col d-flex">
+              <div class="me-2">
+                <input
+                  type="color"
+                  [(ngModel)]="socialLink.font_color"
+                  name=""
+                  id="font"
+                />
+              </div>
+              <div>Font</div>
+            </div>
+            <!-- <div class="col">Font</div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto p-0 m-0">
+      <button
+        matTooltip="Delete Link"
+        [matTooltipPosition]="'right'"
+        class="p-0 m-0"
+        mat-icon-button
+        color="primary"
+        (click)="deleteLink()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
   </div>
 </mat-card>

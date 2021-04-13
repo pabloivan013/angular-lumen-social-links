@@ -1,3 +1,4 @@
+import { EventEmitter, Output } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { SocialLink } from 'src/app/models/social-link.model';
 
@@ -11,11 +12,16 @@ import { SocialLink } from 'src/app/models/social-link.model';
 export class SocialLinkCardComponent implements OnInit {
 
   @Input() socialLink: SocialLink;
+  @Output() onDeleteLink = new EventEmitter<SocialLink>()
   color: string
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  deleteLink() {
+    this.onDeleteLink.emit(this.socialLink);
   }
 
   openLink() {

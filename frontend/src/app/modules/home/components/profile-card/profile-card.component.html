@@ -28,25 +28,62 @@
               </div>
               <div class="row justify-content-start">
                 <div class="col-auto">
-                  <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-form-field
+                    class="pb-2"
+                    appearance="outline"
+                    style="width: 100%; margin-bottom: -1.25em"
+                  >
                     <mat-label>Account name</mat-label>
                     <input
                       matInput
-                      [(ngModel)]="user.accountname"
+                      type="text"
+                      [formControl]="formAccountName"
                       [placeholder]="user.accountname"
                     />
                   </mat-form-field>
+                  <div
+                    class="row"
+                    *ngIf="
+                      formAccountName.invalid &&
+                      (formAccountName.dirty || formAccountName.touched)
+                    "
+                  >
+                    <div class="col">
+                      <mat-error *ngIf="formAccountName.hasError('required')">
+                        <small>Name is <strong>required</strong>.</small>
+                      </mat-error>
+                      <mat-error *ngIf="formAccountName.hasError('minlength')">
+                        <small
+                          >Name must be at least
+                          <strong> 5 characters </strong> long.</small
+                        >
+                      </mat-error>
+                      <mat-error *ngIf="formAccountName.hasError('maxlength')">
+                        <small
+                          >Name only can have
+                          <strong> 15 characters </strong> max.</small
+                        >
+                      </mat-error>
+                      <mat-error *ngIf="formAccountName.hasError('pattern')">
+                        <small
+                          >Name should only contain letters and numbers.</small
+                        >
+                      </mat-error>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-auto mb-3 mt-1">
-                  <button 
-                    [disabled]="user.accountname == validAccountName"
-                    mat-stroked-button 
+                  <button
+                    [disabled]="
+                      !formAccountName.valid ||
+                      formAccountName.value == validAccountName
+                    "
+                    mat-stroked-button
                     (click)="createUpdateUser()"
                   >
                     Update
                   </button>
                 </div>
-                
               </div>
               <div class="row">
                 <div *ngIf="loadingUpdateUser; else elseBlockSave">

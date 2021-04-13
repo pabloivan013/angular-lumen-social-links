@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from '../material/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { LinkButtonComponent } from './components/link-button/link-button.component';
@@ -32,6 +32,7 @@ import { FooterComponent } from './components/footer/footer.component';
     RouterModule,
     ClipboardModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule
   ],
   exports: [
@@ -47,6 +48,7 @@ import { FooterComponent } from './components/footer/footer.component';
     CommonModule,
     ClipboardModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
   ]
 })

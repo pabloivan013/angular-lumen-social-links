@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col">
       <div *ngIf="authenticated">
-
         <div *ngIf="loadingLinks; else elseBlockLinks">
           <app-loading [message]="'Loading user links'"></app-loading>
         </div>
@@ -14,7 +13,6 @@
             ></app-error>
           </div>
         </ng-template>
-
       </div>
     </div>
   </div>
@@ -23,21 +21,12 @@
     <div class="col">
       <div *ngFor="let link of user.socialLinks; index as i">
         {{ updateSocialLinkPos(link, i) }}
-        <div class="row justify-content-center mb-3 ">
+        <div class="row justify-content-center mb-3">
           <div class="col">
-            <app-social-link-card [socialLink]="link"></app-social-link-card>
-          </div>
-          <div class="col-auto p-0 m-0 text-left">
-            <button
-              matTooltip="Delete Link"
-              [matTooltipPosition]="'right'"
-              class="p-0 m-0"
-              mat-icon-button
-              color="primary"
-              (click)="deleteSocialLink(i)"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
+            <app-social-link-card
+              (onDeleteLink)="deleteLink($event)"
+              [socialLink]="link"
+            ></app-social-link-card>
           </div>
         </div>
       </div>
