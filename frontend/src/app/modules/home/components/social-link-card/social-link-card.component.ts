@@ -14,8 +14,21 @@ export class SocialLinkCardComponent implements OnInit {
   @Input() socialLink: SocialLink;
   @Output() onDeleteLink = new EventEmitter<SocialLink>()
   color: string
-
   constructor() { }
+
+  showEmojiPicker = false;
+
+  toggleEmojiPicker() {
+    this.showEmojiPicker = !this.showEmojiPicker;
+  }
+
+  onFocus() {
+    this.showEmojiPicker = false;
+  }
+
+  addEmoji(event) {
+    this.socialLink.name = `${this.socialLink.name}${event.emoji.native}`
+  }
 
   ngOnInit(): void {
   }

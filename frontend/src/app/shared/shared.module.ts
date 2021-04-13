@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 import { LinkButtonComponent } from './components/link-button/link-button.component';
 import { LoadingComponent } from './components/loading/loading.component';
@@ -33,7 +34,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ClipboardModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    PickerModule
   ],
   exports: [
     LinkButtonComponent,
@@ -50,6 +52,7 @@ import { FooterComponent } from './components/footer/footer.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    PickerModule,
   ]
 })
 export class SharedModule { }
