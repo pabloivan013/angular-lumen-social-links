@@ -3,96 +3,105 @@
     <div class="col">
       <div class="row">
         <div class="col">
-          <div class="row">
-            <div class="col">
-              <mat-form-field appearance="standard" class="field-full-width">
-                <mat-label>Link name</mat-label>
-                <div class="d-flex">
-                  <input
-                    required
-                    matInput
-                    maxlength="55"
-                    class="mx-auto"
-                    [(ngModel)]="socialLink.name"
-                    name="name"
-                    (click)="onFocus()"
-                    placeholder="name"
-                  />
-                  <button [style]="{width:'30px', height:'20px', bottom: '7px'}" mat-icon-button (click)="toggleEmojiPicker();$event.stopPropagation()">😀</button>
-                </div>
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="row justify-content-center" *ngIf="showEmojiPicker" (click)="onFocus()">
-            <div class="col-auto">
-              <emoji-mart
-                class="emoji-mart w-25"
-                perLine="6"
-                set="twitter"
-                totalFrequentLines="1"
-                *ngIf="showEmojiPicker"
-                (click)="$event.stopPropagation()"
-                (emojiSelect)="addEmoji($event)"
-              ></emoji-mart>
-            </div>
-          </div>           
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
           <mat-form-field appearance="standard" class="field-full-width">
-            <mat-label>URL Link</mat-label>
-            <input
-              required
-              matInput
-              class="mx-auto"
-              [(ngModel)]="socialLink.url"
-              name="URL"
-              placeholder="URL"
-            />
+            <mat-label>Link name</mat-label>
+            <div class="d-flex">
+              <input
+                required
+                matInput
+                maxlength="55"
+                class="mx-auto"
+                [(ngModel)]="socialLink.name"
+                name="name"
+                (click)="onFocus()"
+                placeholder="name"
+              />
+              <button
+                [style]="{ width: '30px', height: '20px', bottom: '7px' }"
+                mat-icon-button
+                (click)="toggleEmojiPicker(); $event.stopPropagation()"
+              >
+                😀
+              </button>
+            </div>
           </mat-form-field>
         </div>
       </div>
-
-      <div class="row justify-content-between" *ngIf="socialLink.name">
-        <div class="col text-center">
-          <div class="row">
-            <div class="col text-center">
-              <app-link-button [link]="socialLink"></app-link-button>
-            </div>
-          </div>
-          <div class="row justify-content-around mt-3">
-            <div class="col">
-              <strong>Background</strong>
-              <hr class="mt-1 mb-3" />
-              <input
-                type="color"
-                [(ngModel)]="socialLink.background_color"
-                name="background"
-                id="background"
-              />
-            </div>
-            <div class="col">
-              <strong>Font</strong>
-              <hr class="mt-1 mb-3" />
-              <input
-                type="color"
-                [(ngModel)]="socialLink.font_color"
-                name=""
-                id="font"
-              />
-            </div>
-          </div>
+      <div
+        class="row justify-content-center"
+        *ngIf="showEmojiPicker"
+        (click)="onFocus()"
+      >
+        <div class="col-auto">
+          <emoji-mart
+            class="emoji-mart w-25"
+            perLine="6"
+            set="twitter"
+            totalFrequentLines="1"
+            *ngIf="showEmojiPicker"
+            (click)="$event.stopPropagation()"
+            (emojiSelect)="addEmoji($event)"
+          ></emoji-mart>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <mat-form-field appearance="standard" class="field-full-width">
+        <mat-label>URL Link</mat-label>
+        <input
+          required
+          matInput
+          class="mx-auto"
+          [(ngModel)]="socialLink.url"
+          name="URL"
+          placeholder="URL"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row justify-content-between" *ngIf="socialLink.name">
+    <div class="col text-center">
+      <div class="row">
+        <div class="col text-center">
+          <app-link-button [link]="socialLink"></app-link-button>
+        </div>
+      </div>
+      <div class="row justify-content-around mt-3">
+        <div class="col">
+          <strong>Background</strong>
+          <hr class="mt-1 mb-3" />
+          <input
+            type="color"
+            [(ngModel)]="socialLink.background_color"
+            name="background"
+            id="background"
+          />
+        </div>
+        <div class="col">
+          <strong>Font</strong>
+          <hr class="mt-1 mb-3" />
+          <input
+            type="color"
+            [(ngModel)]="socialLink.font_color"
+            name=""
+            id="font"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
     <div class="col-auto p-0 m-0">
       <button
         matTooltip="Delete Link"
         [matTooltipPosition]="'right'"
         class="p-0 m-0"
-        mat-icon-button
-        color="primary"
+        mat-stroked-button
+        color="warn"
         (click)="deleteLink()"
       >
         <mat-icon>delete</mat-icon>
