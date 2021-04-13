@@ -1,4 +1,9 @@
 # Angular-lumen-social-links
+
+### Deployed version
+
+<a href="https://lumen-social-links.herokuapp.com/" target="_blank">Social Links</a>
+
 ### Frontend
 
 ##### Auth0
