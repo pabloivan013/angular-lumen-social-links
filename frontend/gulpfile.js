@@ -17,7 +17,10 @@ gulp.task('dist', function(done) {
 
     var $ = cheerio.load(fs.readFileSync(`./dist/${PATH}/index.html`, 'utf-8'))
 
-    $('script').each((i,el) => {
+    $('script').filter((i,el) => {
+        // Filter tagmanager (Google analytics)
+        return $(el).attr('src') && $(el).attr('src').indexOf('googletagmanager') < 0
+    }).each((i,el) => {
         let oldSrc = $(el).attr('src')
         $(el).attr('src', `${PATH}/${oldSrc}`)
     })
