@@ -22,8 +22,10 @@ export class SocialLinkCardComponent implements OnInit {
     this.showEmojiPicker = !this.showEmojiPicker;
   }
 
-  onFocus() {
-    this.showEmojiPicker = false;
+  onClick($event) {
+    // Closes the emoji picker if the .emoji class wasn't clicked
+    if (!$event.target.closest(".emoji"))
+      this.showEmojiPicker = false;
   }
 
   addEmoji(event) {

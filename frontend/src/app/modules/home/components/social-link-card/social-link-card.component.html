@@ -1,4 +1,4 @@
-<mat-card (click)="onFocus()">
+<mat-card (click)="onClick($event)">
   <div class="row justify-content-center">
     <div class="col">
       <div class="row">
@@ -13,13 +13,13 @@
                 class="mx-auto"
                 [(ngModel)]="socialLink.name"
                 name="name"
-                (click)="onFocus()"
                 placeholder="name"
               />
               <button
+                class="emoji"
                 [style]="{ width: '30px', height: '20px', bottom: '7px' }"
                 mat-icon-button
-                (click)="toggleEmojiPicker(); $event.stopPropagation()"
+                (click)="toggleEmojiPicker();"
               >
                 😀
               </button>
@@ -30,16 +30,14 @@
       <div
         class="row justify-content-center"
         *ngIf="showEmojiPicker"
-        (click)="onFocus()"
       >
         <div class="col-auto">
           <emoji-mart
-            class="emoji-mart w-25"
+            class="emoji emoji-mart w-25"
             perLine="6"
             set="twitter"
             totalFrequentLines="1"
             *ngIf="showEmojiPicker"
-            (click)="$event.stopPropagation()"
             (emojiSelect)="addEmoji($event)"
           ></emoji-mart>
         </div>
