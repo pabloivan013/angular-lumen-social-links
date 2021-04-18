@@ -23,6 +23,9 @@ class UserController extends Controller
     /** Auth0 **/
     public function createUpdateUser(Request $request) 
     {
+        if ($request['accountname']) {
+            $request['accountname'] = strtolower($request['accountname']);
+        }
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
@@ -74,12 +77,14 @@ class UserController extends Controller
     /** Public **/
     public function getUserLinksByName($accountname) 
     {
+        $accountname = strtolower($accountname);
         $links = $this->userService->getUserLinks('accountname', $accountname);
         return response()->json($links, 200);
     }
 
     public function getUserByName($accountname) 
     {     
+        $accountname = strtolower($accountname);
         $user = $this->userService->getUser('accountname', $accountname, ['accountname','picture']);
         return response()->json($user, 200);
     }

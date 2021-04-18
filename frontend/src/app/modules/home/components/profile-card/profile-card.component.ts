@@ -99,6 +99,7 @@ export class ProfileCardComponent implements OnInit {
         this.snackBarService.success('User updated');
         this.successLoadUpdateUser = true;
         this.validAccountName = user.accountname;
+        this.formAccountName.setValue(this.validAccountName)
       },
       (error) => {
         console.log('createUpdateUser error: ', error);

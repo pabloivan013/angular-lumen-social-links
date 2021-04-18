@@ -76,7 +76,7 @@
                   <button
                     [disabled]="
                       !formAccountName.valid ||
-                      formAccountName.value == validAccountName
+                      formAccountName.value.toLowerCase() == validAccountName.toLowerCase()
                     "
                     mat-stroked-button
                     (click)="createUpdateUser()"

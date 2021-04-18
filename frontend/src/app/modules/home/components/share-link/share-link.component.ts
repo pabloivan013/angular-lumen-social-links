@@ -14,6 +14,7 @@ export class ShareLinkComponent implements OnInit {
   constructor(private snackBarService: SnackbarService ) { }
 
   ngOnInit(): void {
+    this.url = this.url.toLowerCase()
   }
 
   copied() {
